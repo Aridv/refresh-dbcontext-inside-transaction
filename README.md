@@ -1,3 +1,3 @@
 # Refresh DBContext Inside Transaction
 
-Please, refer to develop branch for working code.
+Refreshing database context inside transaction, updating after insert trigger values in the objects.
