@@ -6,9 +6,9 @@ namespace RefreshDBContextInsideTransaction
     {
         static void Main(string[] args)
         {
-            try
+            using (var ctx = new context())
             {
-                using (var ctx = new context())
+                try
                 {
                     ctx.Connection.Open();
                     ctx.Transaction = ctx.Connection.BeginTransaction();
@@ -22,10 +22,10 @@ namespace RefreshDBContextInsideTransaction
                     ctx.Transaction.Commit();
                     return newModel;
                 }
-            }
-            catch (Exception ex)
-            {
-                ctx.Transaction.Rollback();
+                catch (Exception ex)
+                {
+                    ctx.Transaction.Rollback();
+                }
             }
         }
     }
